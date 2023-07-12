@@ -155,6 +155,7 @@ int main(int argc, char **argv) {
         machine_pin_init();
         rp2_pio_init();
         machine_i2s_init0();
+        rp2_dma_init();
 
         #if MICROPY_PY_BLUETOOTH
         mp_bluetooth_hci_init();
@@ -199,6 +200,7 @@ int main(int argc, char **argv) {
 
     soft_reset_exit:
         mp_printf(MP_PYTHON_PRINTER, "MPY: soft reboot\n");
+        rp2_dma_deinit();
         #if MICROPY_PY_NETWORK
         mod_network_deinit();
         #endif
